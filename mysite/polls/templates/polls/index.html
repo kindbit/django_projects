@@ -1,0 +1,14 @@
+<h1>LIST OF QUESTIONS</h1>
+<p>This is the list of questions stored in models:</p>
+{% if latest_question_list %}
+    <ul>
+    {% for question in latest_question_list %}
+    <li><a href="{% url 'polls:detail' question.id %}">{{ question.question_text }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No polls are available.</p>
+{% endif %}
+<p>This is one paragraph of lorem made with built-in templates tags and filters:</p>
+{% lorem %}
+<p>dfa92d8f </p>
