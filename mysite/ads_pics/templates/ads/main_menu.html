@@ -1,0 +1,12 @@
+{% extends 'ads/base_menu.html' %}
+{% block title %}{{ settings.APP_NAME }}{% endblock %}
+{% block content %}
+<h1>Ads 1.0</h1>
+<h4>I am the content block in templates/ads/main_menu.html</h4>
+<p>
+request.path: {{ request.path }}
+</p>
+
+<a href="{% url 'ads:all' %}">All ads</a>
+
+{% endblock %}

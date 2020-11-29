@@ -27,10 +27,18 @@ DEBUG = True
 
 ALLOWED_HOSTS = [ '*' ]
 
-
 # Application definition
 
 INSTALLED_APPS = [
+    'forums.apps.ForumsConfig',
+    'pics.apps.PicsConfig',
+    'django_extensions',
+    'unesco.apps.UnescoConfig',
+    'ads.apps.AdsConfig',
+    'crispy.apps.CrispyConfig',
+    'django.contrib.humanize',
+    'crispy_forms',
+    'myarts.apps.MyartsConfig',
     'cats.apps.CatsConfig',
     'autos.apps.AutosConfig',
     'form.apps.FormConfig',
@@ -45,7 +53,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-]
+] 
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

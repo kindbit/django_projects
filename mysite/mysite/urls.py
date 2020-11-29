@@ -25,10 +25,15 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SITE_ROOT = os.path.join(BASE_DIR, 'site')
 
 urlpatterns = [
+    path('forums/', include('forums.urls')),
+    path('pics/', include('pics.urls')),
+    path('ads/', include('ads.urls')),
+    path('crispy/',include('crispy.urls')),
+    path('myarts/',include('myarts.urls')),
     path('cats/',include('cats.urls')),
     path('accounts/', include('django.contrib.auth.urls')),
     path('autos', include('autos.urls')),
-    path('form', include('form.urls')),
+    path('form/', include('form.urls')),
     path('authz/', include('authz.urls')),
     path('hello', include('hello.urls')),
     path('', TemplateView.as_view(template_name='home/main.html')),
