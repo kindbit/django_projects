@@ -30,6 +30,7 @@ ALLOWED_HOSTS = [ '*' ]
 # Application definition
 
 INSTALLED_APPS = [
+    'chat.apps.ChatConfig',
     'forums.apps.ForumsConfig',
     'pics.apps.PicsConfig',
     'django_extensions',

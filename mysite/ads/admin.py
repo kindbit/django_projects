@@ -1,6 +1,6 @@
 from django.contrib import admin
 from ads.models import Ad
-#from ads.models import Comment
+from ads.models import Comment
 # Register your models here.
 
 # We want the admin UI to leave the picture and content_type alone
@@ -11,4 +11,4 @@ class AdAdmin(admin.ModelAdmin):
 
 # Register the admin class with the associated model
 admin.site.register(Ad, AdAdmin)
-#admin.site.register(Comment)
+admin.site.register(Comment)

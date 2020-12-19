@@ -19,7 +19,8 @@ class Ad(models.Model) :
 
     #Comment
     owner = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='ad_owned')
-    comments = models.ManyToManyField(settings.AUTH_USER_MODEL, through='Comment', related_name='ad_commented')
+    comments = models.ManyToManyField(settings.AUTH_USER_MODEL,
+        through='Comment', related_name='ads_commented')
     
     # Shows up in the admin list
     def __str__(self):
@@ -31,7 +32,7 @@ class Comment(models.Model) :
     )
 
     ad = models.ForeignKey(Ad, on_delete=models.CASCADE)
-    owner = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="comments_owned")
+    owner = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='comments_owned')
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)

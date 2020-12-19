@@ -25,6 +25,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SITE_ROOT = os.path.join(BASE_DIR, 'site')
 
 urlpatterns = [
+    path('chat/', include('chat.urls')),
     path('forums/', include('forums.urls')),
     path('pics/', include('pics.urls')),
     path('ads/', include('ads.urls')),
