@@ -1,0 +1,40 @@
+{% extends "base_bootstrap.html" %}
+
+{% block content %}
+
+{% if form.errors %}
+  <p>Your username and password didn't match. Please try again.</p>
+{% endif %}
+
+{% if next %}
+  {% if user.is_authenticated %}
+    <p>Your account doesn't have access to this page. To proceed,
+    please login with an account that has access.</p>
+  {% else %}
+    <p>Please login to see this site.</p>
+  {% endif %}
+{% endif %}
+
+{% load crispy_forms_tags %}
+
+<form method="post" action="{% url 'login' %}">
+{% csrf_token %}
+{{ form|crispy }}
+<input type="submit" class="btn btn-primary" value="Login Locally" />
+<input type="hidden" name="next" value="{{ next }}" />
+</form>
+
+<p>rrzm here 1</p>
+<p>rrzm here 222 {{github_settings.SOCIAL_AUTH_GITHUB_KEY}}</p>
+{% if settings.SOCIAL_AUTH_GITHUB_KEY %}
+<p>rrzm here 3</p>
+{% endif %} 
+<a class="btn btn-info" role="button" href="{% url 'social:begin' 'github' %}?next={{ next }}">
+    <i class="fa fa-github" aria-hidden="true"></i>
+    Login with GitHub</a>
+
+
+<!-- ROOT_URLCONF {{ settings.ROOT_URLCONF }} -->
+
+{% endblock %}
+
