@@ -28,6 +28,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SITE_ROOT = os.path.join(BASE_DIR, 'site')
 
 urlpatterns = [
+    path('well/', include('well.urls')),
     url(r'^oauth/', include('social_django.urls', namespace='social')),  # Keep
     path('favs/', include('favs.urls')),
     #path('unesco/', include('unesco.urls')),

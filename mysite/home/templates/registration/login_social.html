@@ -24,15 +24,13 @@
 <input type="hidden" name="next" value="{{ next }}" />
 </form>
 
-<p>rrzm here 1</p>
-<p>rrzm here 222 {{github_settings.SOCIAL_AUTH_GITHUB_KEY}}</p>
 {% if settings.SOCIAL_AUTH_GITHUB_KEY %}
-<p>rrzm here 3</p>
-{% endif %} 
+<hr/>
+ {% endif %}
+<hr/>
 <a class="btn btn-info" role="button" href="{% url 'social:begin' 'github' %}?next={{ next }}">
     <i class="fa fa-github" aria-hidden="true"></i>
     Login with GitHub</a>
-
 
 <!-- ROOT_URLCONF {{ settings.ROOT_URLCONF }} -->
 
