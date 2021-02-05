@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'home.apps.HomeConfig',   
 
     # Apps
+    'adpet.apps.AdpetConfig',
     'well.apps.WellConfig',
     'favs.apps.FavsConfig',
     'chat.apps.ChatConfig',

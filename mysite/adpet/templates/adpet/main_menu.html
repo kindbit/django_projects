@@ -1,0 +1,12 @@
+{% extends 'adpet/base_menu.html' %}
+{% block title %} This is {{ settings.APP_NAME }}{% endblock %}
+{% block content %}
+<h1>adpet 1.0 this is not working</h1>
+<h4>I am the content block in templates/adpet/main_menu.html</h4>
+<p>
+request.path: {{ request.path }}
+</p>
+
+<a href="{% url 'adpet:all' %}">All adpet</a>
+
+{% endblock %}
