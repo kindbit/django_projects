@@ -1,5 +1,5 @@
 from django import forms
-from adpet.models import Ad, Comment, Animal
+from adpet.models import Ad, Comment
 from django.core.files.uploadedfile import InMemoryUploadedFile
 from adpet.humanize import naturalsize
 from django.core.exceptions import ValidationError
@@ -22,7 +22,7 @@ class CreateForm(forms.ModelForm):
     # Hint: this will need to be changed for use in the ads application :)
     class Meta:
         model = Ad
-        fields = ['title', 'animal', 'text', 'picture', 'breed',  'price']  # Picture is manual
+        fields = ['title','specie', 'gender', 'seize', 'vaccinated', 'sterilized', 'breed','weight','age', 'text', 'picture']  # Picture is manual
 
     # Validate the size of the picture
     def clean(self) :
