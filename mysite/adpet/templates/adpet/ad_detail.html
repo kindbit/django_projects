@@ -35,7 +35,31 @@
     onclick="document.getElementById('overlay').style.display = 'block';">
 {% endif %}
 <p>
-{{ ad.text }}
+Pet: {{ad.specie}}
+</p>
+<p>
+Gender: {{ad.gender}}
+</p>
+<p>
+Breed: {{ad.breed}}
+</p>
+<p>
+Age: {{ad.age}} years
+</p>
+<p>
+Weight: {{ad.weight}} Kg
+</p>
+<p>
+Approximate size: {{ad.size}}
+</p>
+<p>
+Vaccinated: {{ad.vaccinated}}
+</p>
+<p>
+Spayed/neutered: {{ad.sterilized}}
+</p>
+<p>
+Description: {{ ad.text }}
 </p>
 
 {% if user.is_authenticated %}

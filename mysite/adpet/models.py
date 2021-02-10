@@ -3,59 +3,41 @@ from django.core.validators import MinLengthValidator
 from django.contrib.auth.models import User
 from django.conf import settings
 
-class Computer(models.Model):
-    computer_name = models.CharField(max_length=30)
-    IP_address = models.CharField(max_length=30)
-    MAC_address = models.CharField(max_length=30)
-    users_name = models.CharField(max_length=30)
-    location = models.CharField(max_length=30)
-    category_choice = (
-		('Furniture', 'Furniture'),
-		('IT Equipment', 'IT Equipment'),
-		('Phone', 'Phone'),
-	)
-    category = models.CharField(max_length=50, blank=True, null=True, choices=category_choice)
-    def __unicode__(self):
-        return self.computer_name
-
 class Ad(models.Model) :
     title = models.CharField(
             max_length=200,
             validators=[MinLengthValidator(2, "Title must be greater than 2 characters")]
     )
 
-    CAT = 'CT'
-    DOG = 'DG'
-
-    NAME_SPECIE =(
-        (CAT, 'Cat'),
-        (DOG, 'Dog'),
+    specie_choices =(
+        ('Cat', 'Cat'),
+        ('Dog', 'Dog'),
     )
 
-    specie = models.CharField(max_length=200, choices=NAME_SPECIE)
-    
-    GENDER_CHOICES = (
-        (0, 'Male'),
-        (1, 'Female'),
+    specie = models.CharField(max_length=50, choices=specie_choices, null=True)
+
+    gender_choices= (
+        ('Male', 'Male'),
+        ('Female', 'Female'),
     )
 
-    gender = models.IntegerField(choices=GENDER_CHOICES, null=True)
+    gender = models.CharField(max_length=50, choices=gender_choices, null=True)
 
-    SEIZE_CHOICES = (
-        (0,'Small'),
-        (1,'Medium'),
-        (2,'Big'),
+    size_choices = (
+        ('Small','Small'),
+        ('Medium','Medium'),
+        ('Big','Big'),
     )
 
-    seize = models.IntegerField(choices=SEIZE_CHOICES, null=True)
+    size = models.CharField(max_length=50, choices=size_choices, null=True)
 
-    YES_NO_CHOICES = (
-        (0,'Yes'),
-        (1,'No'),
+    yes_no_choices = (
+        ('Yes','Yes'),
+        ('No','No'),
     )
-    
-    vaccinated = models.IntegerField(choices=YES_NO_CHOICES, null=True)
-    sterilized = models.IntegerField(choices=YES_NO_CHOICES, null=True)
+
+    vaccinated = models.CharField(max_length=50, choices=yes_no_choices, null=True)
+    sterilized = models.CharField(max_length=50, choices=yes_no_choices, null=True)
 
     breed = models.CharField(max_length=30, null=True)
     weight = models.DecimalField(max_digits=4,decimal_places=2, null=True)
