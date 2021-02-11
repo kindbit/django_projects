@@ -10,7 +10,13 @@
     <ul class="nav navbar-nav">
       {% url 'adpet' as adpet %}
       <li {% if request.get_full_path == adpet %}class="active"{% endif %}>
-          <a href="{% url 'adpet:all' %}">List of adoptions</a></li>
+          <a href="{% url 'adpet:all' %}">Main Page</a></li>
+      <li {% if request.get_full_path == adpet %}class="active"{% endif %}>
+          <a href="{% url 'adpet:all' %}">All dogs</a></li>
+      <li {% if request.get_full_path == adpet %}class="active"{% endif %}>
+          <a href="{% url 'adpet:all' %}">All cats</a></li>
+       <li {% if request.get_full_path == adpet %}class="active"{% endif %}>
+          <a href="{% url 'adpet:all' %}">Contact us</a></li>
     </ul>
     <ul class="nav navbar-nav navbar-right">
         {% if user.is_authenticated %}

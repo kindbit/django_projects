@@ -3,6 +3,7 @@
 {% block content %}
 <style>
 h1 {text-align:center}
+h2 {text-align:center}
 
 {
   box-sizing: border-box;
@@ -13,7 +14,7 @@ h1 {text-align:center}
   float: left;
   width: 50%;
   padding: 10px;
-  height: 700px; 
+  height: 750px;
 }
 
 /* Clear floats after the columns */
@@ -21,6 +22,11 @@ h1 {text-align:center}
   content: "";
   display: table;
   clear: both;
+}
+
+/* Show only 3 elements from list */
+.column ul li:nth-of-type(1n+4) {
+  display:none;
 }
 
 </style>
@@ -40,62 +46,61 @@ h1 {text-align:center}
 <p>
 {% if ad_list %}
 <div class="row">
-  <div class="column" style="background-color:#aaa;"
+  <div class="column" style="background-color:#aaa;">
+  <h2> DOGS </h2>
+    <ul class = "grid-list">
+      {% for ad in ad_list %}
+        {% if ad.specie == 'Cat'  %}
+            <li>
+                <a href="{% url 'adpet:ad_detail' ad.id %}"> {{ad.gender }} {{ ad.breed }} {{ad.specie}} </a>
+                <p>Approximate size: {{ad.size}}</p>
 
-<ul>
-  {% for ad in ad_list %}
-    {% if ad.specie == 'Cat'  %}
-        <li>
-            <a href="{% url 'adpet:ad_detail' ad.id %}"> {{ad.gender }} {{ ad.breed }} {{ad.specie}} </a>
-            <p>Approximate size: {{ad.size}}</p>
-        
-            {% if ad.content_type %}
-                <div id="overlay" class="overlay" style="text-align: left;"
-                onclick="document.getElementById('overlay').style.display = 'none';" >
-                <img style="width:20%;margin-top: 12px; border:3px solid black;" src="{% url 'adpet:ad_picture' ad.id %}">
-                </div>
-            {% endif %}
-        
-            <p>posted by {{ad.owner}} {{ad.created_at}}</p>
-            {% if ad.owner == user %}
-            (<a href="{% url 'adpet:ad_update' ad.id %}">Edit</a> |
-            <a href="{% url 'adpet:ad_delete' ad.id %}">Delete</a>)
-            {% endif %}
-    
-        </li>
-    {% endif %}
-  {% endfor %}
-</ul>
+                {% if ad.content_type %}
+                    <div id="overlay" class="overlay" style="text-align: left;"
+                    onclick="document.getElementById('overlay').style.display = 'none';" >
+                    <img style="width:20%;margin-top: 12px; border:3px solid black;" src="{% url 'adpet:ad_picture' ad.id %}">
+                    </div>
+                {% endif %}
 
-</div>
-<div class="column" style="background-color:#bbb;">
+                <p>posted by {{ad.owner}} {{ad.created_at}}</p>
+                {% if ad.owner == user %}
+                (<a href="{% url 'adpet:ad_update' ad.id %}">Edit</a> |
+                <a href="{% url 'adpet:ad_delete' ad.id %}">Delete</a>)
+                {% endif %}
 
-<ul>
-  {% for ad in ad_list %}
-    {% if ad.specie == 'Dog'  %}
-        <li>
-            <a href="{% url 'adpet:ad_detail' ad.id %}"> {{ad.gender }} {{ ad.breed }} {{ad.specie}} </a>
-            <p>Approximate size: {{ad.size}}</p>
-        
-            {% if ad.content_type %}
-                <div id="overlay" class="overlay" style="text-align: left;"
-                onclick="document.getElementById('overlay').style.display = 'none';" >
-                <img style="width:20%;margin-top: 12px; border:3px solid black;" src="{% url 'adpet:ad_picture' ad.id %}">
-                </div>
-            {% endif %}
-        
-            <p>posted by {{ad.owner}} {{ad.created_at}}</p>
-            {% if ad.owner == user %}
-            (<a href="{% url 'adpet:ad_update' ad.id %}">Edit</a> |
-            <a href="{% url 'adpet:ad_delete' ad.id %}">Delete</a>)
-            {% endif %}
-    
-        </li>
-    {% endif %}
-  {% endfor %}
-</ul>
+            </li>
+        {% endif %}
+      {% endfor %}
+    </ul>
 
 </div>
+ <div class="column" style="background-color:#bbb;">
+ <h2> CATS </h2>
+    <ul class = "grid-list">
+      {% for ad in ad_list %}
+        {% if ad.specie == 'Dog'  %}
+            <li>
+                <a href="{% url 'adpet:ad_detail' ad.id %}"> {{ad.gender }} {{ ad.breed }} {{ad.specie}} </a>
+                <p>Approximate size: {{ad.size}}</p>
+                {% if ad.content_type %}
+                    <div id="overlay" class="overlay" style="text-align: left;"
+                    onclick="document.getElementById('overlay').style.display = 'none';" >
+                    <img style="width:20%;margin-top: 12px; border:3px solid black;" src="{% url 'adpet:ad_picture' ad.id %}">
+                    </div>
+                {% endif %}
+
+                <p>posted by {{ad.owner}} {{ad.created_at}}</p>
+                {% if ad.owner == user %}
+                (<a href="{% url 'adpet:ad_update' ad.id %}">Edit</a> |
+                <a href="{% url 'adpet:ad_delete' ad.id %}">Delete</a>)
+                {% endif %}
+
+            </li>
+        {% endif %}
+      {% endfor %}
+    </ul>
+
+ </div>
 </div>
 
 {% else %}
