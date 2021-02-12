@@ -2,6 +2,11 @@ from django.db import models
 from django.core.validators import MinLengthValidator
 from django.contrib.auth.models import User
 from django.conf import settings
+#from phone_field import PhoneField
+
+#class Contact(models.model):
+#    name = models.CharField(max_length=100, null=True)
+#    phone = PhoneField(blank=True, help_text='Contact phone number')
 
 class Ad(models.Model) :
     title = models.CharField(

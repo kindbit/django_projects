@@ -2,6 +2,7 @@
 {% block navbar %}
 {% load app_tags %}
 <nav class="navbar navbar-default navbar-inverse">
+<!<nav class="navbar navbar-light" style="background-color: #e3f2fd;">
   <div class="container-fluid">
     <div class="navbar-header">
         <a class="navbar-brand" href="/">{{ settings.APP_NAME }}</a>
@@ -12,11 +13,11 @@
       <li {% if request.get_full_path == adpet %}class="active"{% endif %}>
           <a href="{% url 'adpet:all' %}">Main Page</a></li>
       <li {% if request.get_full_path == adpet %}class="active"{% endif %}>
-          <a href="{% url 'adpet:all' %}">All dogs</a></li>
+          <a href="{% url 'adpet:all_dogs' %}">All dogs</a></li>
       <li {% if request.get_full_path == adpet %}class="active"{% endif %}>
-          <a href="{% url 'adpet:all' %}">All cats</a></li>
+          <a href="{% url 'adpet:all_cats' %}">All cats</a></li>
        <li {% if request.get_full_path == adpet %}class="active"{% endif %}>
-          <a href="{% url 'adpet:all' %}">Contact us</a></li>
+          <a href="{% url 'adpet:contact_us' %}">Contact us</a></li>
     </ul>
     <ul class="nav navbar-nav navbar-right">
         {% if user.is_authenticated %}
