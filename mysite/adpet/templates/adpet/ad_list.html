@@ -52,7 +52,7 @@ h2 {text-align:center}
       {% for ad in ad_list %}
         {% if ad.specie == 'Cat'  %}
             <li>
-                <a href="{% url 'adpet:ad_detail' ad.id %}"> {{ad.gender }} {{ ad.breed }} {{ad.specie}} </a>
+                <a href="{% url 'adpet:ad_detail' ad.id %}"> {{ad.gender }} {{ ad.breed }} {{ad.specie}} {{ad.contact}} </a>
                 <p>Approximate size: {{ad.size}}</p>
 
                 {% if ad.content_type %}

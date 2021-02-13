@@ -16,7 +16,7 @@ from django.db.models import Q
 
 class AdListView(OwnerListView):
     model = Ad
-    fields = ['title','text','specie','owner','created_at','updated_at']
+    fields = ['contact','title','text','specie','owner','created_at','updated_at']
     success_url = reverse_lazy('adpet:all')
     template_name = "adpet/ad_list.html"
     def get(self, request) :
