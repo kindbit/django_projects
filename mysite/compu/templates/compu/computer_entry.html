@@ -1,4 +1,5 @@
 {%load static%}
+{% load crispy_forms_tags %}
 
 <!doctype html>
 <html lang="en">
@@ -50,40 +51,21 @@
   </head>
   <body>
 
-<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="#">CIMS</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarCollapse">
-      <ul class="navbar-nav me-auto mb-2 mb-md-0">
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="{% url 'compu:main' %}">Home</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="computer_list">Computer List</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="computer_entry">Computer Entry</a>
-        </li>
-      </ul>
-      <form class="d-flex">
-        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success" type="submit">Search</button>
-      </form>
-    </div>
-  </div>
-</nav>
+{% include 'compu/navbar.html' %}
 
 <main class="container">
   <div class="bg-light p-5 rounded">
-      <h1>{{title}}</h1>
-          <form method="post" action="">
-            {% csrf_token %}
-            {{form.as_p}}
-            <input type="submit" value="Save" />
-          </form>
+        <div class="row">
+            <div class="col-sm-6"> <!--- this is the half of the page--->
+                <h1>{{title}}</h1>
+                <form method="post" action="">
+                    {% csrf_token %}
+                    {{form|crispy}}
+                    <p> </p>
+                    <input class="btn btn-primary" type="submit" value="Save" />
+                </form>
+            </div> <!--- first col-sm-6 --->
+        </div> <!--- first row --->
   </div>
 </main>
 
