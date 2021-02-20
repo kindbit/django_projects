@@ -54,7 +54,7 @@
 
 <main class="container">
   <div class="bg-light p-5 rounded">
-      <h1>{{title}}</h1>
+      <h1 class="title">{{title}}</h1>
         <table>
             <tr>
                 <th>#</th>
@@ -63,15 +63,17 @@
                 <th>IP ADDRESS</th>
                 <th>USER’S NAME</th>
                 <th>LOCATION</th>
+                <th>DELETE</th>
             </tr>
             {% for instance in queryset %}
             <tr>
                 <td>{{forloop.counter}}</td>
-                <td>{{instance.Computer_name}}</td>
+                <td><a href="{% url 'compu:computer_edit' id=instance.id%}">{{instance.computer_name}} </a></td>
                 <td>{{instance.MAC_address}}</td>
                 <td>{{instance.IP_address}}</td>
                 <td>{{instance.users_name}}</td>
                 <td>{{instance.location}}</td>
+                <td><a href="{% url 'compu:computer_delete' id=instance.id%}"> Delete </a></td>
             </tr>
             {% endfor %}
         </table>
