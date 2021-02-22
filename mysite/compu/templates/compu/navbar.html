@@ -10,10 +10,10 @@
           <a class="nav-link active" aria-current="page" href="{% url 'compu:main' %}">Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="computer_list">Computer List</a>
+            <a class="nav-link" href="{% url 'compu:computer_list' %}">Computer List</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="computer_entry">Computer Entry</a>
+            <a class="nav-link" href="{% url 'compu:computer_entry' %}">Computer Entry</a>
         </li>
       </ul>
       <form class="d-flex">

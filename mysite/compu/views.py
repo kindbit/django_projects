@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .forms import ComputerForm
+from .forms import ComputerForm, ComputerSearchForm
 from .models import Computer
 
 def main(request):
@@ -24,10 +24,19 @@ def computer_entry(request):
 def computer_list(request):
     title = 'List of all computers'
     queryset = Computer.objects.all()
+    form = ComputerSearchForm(request.POST or None)
     context = {
     "title": title,
     "queryset": queryset,
+    "form": form,
     }
+    if request.method == 'POST':
+        queryset = Computer.objects.all().order_by('-timestamp').filter(computer_name__icontains=form['computer_name'].value(),users_name__icontains=form['users_name'].value())
+        context = {
+            "title": title,
+            "queryset": queryset,
+            "form": form,
+        }
     return render(request, "compu/computer_list.html", context)
 
 def computer_edit(request,id=None):
@@ -42,7 +51,7 @@ def computer_edit(request,id=None):
             "instance": instance,
             "form": form,
             }
-    return render(request, "/compu/computer_entry.html", context)
+    return render(request, "compu/computer_entry.html", context)
 
 def computer_delete(request, id=None):
     instance = get_object_or_404(Computer, id=id)

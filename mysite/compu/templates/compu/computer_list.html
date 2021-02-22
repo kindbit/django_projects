@@ -1,4 +1,5 @@
 {%load static%}
+{% load crispy_forms_tags %}
 
 <!doctype html>
 <html lang="en">
@@ -55,6 +56,11 @@
 <main class="container">
   <div class="bg-light p-5 rounded">
       <h1 class="title">{{title}}</h1>
+        <form method="post" action="">
+            {% csrf_token %}
+            {{form|crispy}}
+            <input class="btn btn-primary" type="submit" value="Search" />
+        </form>
         <table>
             <tr>
                 <th>#</th>
@@ -63,6 +69,8 @@
                 <th>IP ADDRESS</th>
                 <th>USER’S NAME</th>
                 <th>LOCATION</th>
+                <th>PURCHASE DATE</th>
+                <th>TIMESTAMP</th>
                 <th>DELETE</th>
             </tr>
             {% for instance in queryset %}
@@ -73,6 +81,8 @@
                 <td>{{instance.IP_address}}</td>
                 <td>{{instance.users_name}}</td>
                 <td>{{instance.location}}</td>
+                <td>{{instance.purchase_date}}</td>
+                <td>{{instance.timestamp}}</td>
                 <td><a href="{% url 'compu:computer_delete' id=instance.id%}"> Delete </a></td>
             </tr>
             {% endfor %}
