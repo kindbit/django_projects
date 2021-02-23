@@ -1,6 +1,8 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .forms import ComputerForm, ComputerSearchForm
 from .models import Computer
+from django.http import HttpResponse
+import csv
 
 def main(request):
     title = 'Welcome: This is the Home Page'
@@ -14,6 +16,8 @@ def computer_entry(request):
     form = ComputerForm(request.POST or None)
     if form.is_valid():
         form.save()
+        #form.save(commit=False)
+        #form.save_m2m()
         return redirect('/compu/computer_list')
     context = {
         "title": title,
@@ -37,6 +41,15 @@ def computer_list(request):
             "queryset": queryset,
             "form": form,
         }
+        if form['export_to_CSV'].value() == True: 
+            response = HttpResponse(content_type='text/csv') 
+            response['Content-Disposition'] = 'attachment; filename="Computer list.csv"' 
+            writer = csv.writer(response) 
+            writer.writerow(['COMPUTER NAME', 'IP Address', 'MAC ADDRESS', 'OS', 'USERNAME', 'LOCATION', 'PURCHASE DATE', 'TIMESTAMP']) 
+            instance = queryset 
+            for row in instance: 
+                writer.writerow([row.computer_name, row.IP_address, row.MAC_address, row.operating_system, row.users_name, row.location, row.purchase_date, row.timestamp]) 
+            return response
     return render(request, "compu/computer_list.html", context)
 
 def computer_edit(request,id=None):
@@ -45,6 +58,7 @@ def computer_edit(request,id=None):
     if form.is_valid():
         instance = form.save(commit=False)
         instance.save()
+        #form.save_m2m()
         return redirect("/compu/computer_list")
     context = {
             "title": 'Edit'+str(instance.computer_name),

@@ -66,6 +66,7 @@
                 <th>#</th>
                 <th>PC NAME</th>
                 <th>MAC ADDR</th>
+                <th>OPERATING SYSTEM</th>
                 <th>IP ADDRESS</th>
                 <th>USER’S NAME</th>
                 <th>LOCATION</th>
@@ -78,6 +79,7 @@
                 <td>{{forloop.counter}}</td>
                 <td><a href="{% url 'compu:computer_edit' id=instance.id%}">{{instance.computer_name}} </a></td>
                 <td>{{instance.MAC_address}}</td>
+                <td>{{instance.operating_system}}</td>
                 <td>{{instance.IP_address}}</td>
                 <td>{{instance.users_name}}</td>
                 <td>{{instance.location}}</td>
