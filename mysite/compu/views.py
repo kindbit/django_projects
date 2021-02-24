@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from .forms import ComputerForm, ComputerSearchForm
 from .models import Computer
 from django.http import HttpResponse
+from django.contrib import messages
 import csv
 
 def main(request):
@@ -18,6 +19,7 @@ def computer_entry(request):
         form.save()
         #form.save(commit=False)
         #form.save_m2m()
+        messages.success(request, 'Successfully Saved')
         return redirect('/compu/computer_list')
     context = {
         "title": title,
@@ -59,6 +61,7 @@ def computer_edit(request,id=None):
         instance = form.save(commit=False)
         instance.save()
         #form.save_m2m()
+        messages.success(request, 'Successfully Saved')
         return redirect("/compu/computer_list")
     context = {
             "title": 'Edit'+str(instance.computer_name),
