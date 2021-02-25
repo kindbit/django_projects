@@ -1,10 +1,22 @@
 body{
+    background-image: url(../img/bg.jpg);
+}
 
+.flt-search #div_id_computer_name, 
+.flt-search #div_id_users_name{
+    float: left;
+    width: 200px;
+    margin-right: 20px;
 }
 
 /*Align the title to the center of the page*/
 .title{
- text-align: center;
+    text-align: center;
+    font-family: helvetica;
+    font-weight: bold;
+    font-size: 25px;
+    color: #2e6da4;
+    text-align: left;
 }
 
 /*Color, align and shadow the table*/

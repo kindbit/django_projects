@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Hugo 0.80.0">
-    <title>Fixed top navbar example · Bootstrap v5.0</title>
+    <title>Inventory System</title>
 
     <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/navbar-fixed/">
 
@@ -63,11 +63,15 @@
        </ul>
       {% endif %}      
       <h1 class="title">{{title}}</h1>
+        <p></p>
+        <div class="flt-search">
         <form method="post" action="">
             {% csrf_token %}
             {{form|crispy}}
             <input class="btn btn-primary" type="submit" value="Search" />
+        <p></p>
         </form>
+        </div>
         <table>
             <tr>
                 <th>#</th>
@@ -84,7 +88,7 @@
             {% for instance in queryset %}
             <tr>
                 <td>{{forloop.counter}}</td>
-                <td><a href="{% url 'compu:computer_edit' id=instance.id%}">{{instance.computer_name}} </a></td>
+                <td><a href="{% url 'compu:computer_edit' id=instance.id%}" data-toggle="tooltip" title="edit this item">{{instance.computer_name}} </a></td>
                 <td>{{instance.MAC_address}}</td>
                 <td>{{instance.operating_system}}</td>
                 <td>{{instance.IP_address}}</td>
@@ -92,7 +96,7 @@
                 <td>{{instance.location}}</td>
                 <td>{{instance.purchase_date}}</td>
                 <td>{{instance.timestamp}}</td>
-                <td><a href="{% url 'compu:computer_delete' id=instance.id%}"> Delete </a></td>
+                <td><a href="{% url 'compu:computer_delete' id=instance.id%}" data-toggle="tooltip" title="delete this item"> <img src="{% static 'img/del.png' %}"> </a></td>
             </tr>
             {% endfor %}
         </table>
