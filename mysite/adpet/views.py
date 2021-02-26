@@ -6,9 +6,8 @@ from django.shortcuts import render, redirect, get_object_or_404
 
 from adpet.owner import OwnerListView, OwnerDetailView, OwnerCreateView, OwnerUpdateView, OwnerDeleteView
 
-from adpet.models import Ad, Comment
+from adpet.models import Ad
 from adpet.forms import CreateForm
-from adpet.forms import CommentForm
 
 from django.contrib.humanize.templatetags.humanize import naturaltime
 from well.utils import dump_queries
@@ -16,7 +15,7 @@ from django.db.models import Q
 
 class AdListView(OwnerListView):
     model = Ad
-    fields = ['name','phone','title','text','specie','owner','created_at','updated_at']
+    fields = ['title', 'specie', 'text','owner','created_at','updated_at', 'name','phone' ]
     success_url = reverse_lazy('adpet:all')
     template_name = "adpet/ad_list.html"
     def get(self, request) :
@@ -52,9 +51,7 @@ class AdDetailView(OwnerDetailView):
     template_name = "adpet/ad_detail.html"
     def get(self, request, pk) :
         x = Ad.objects.get(id=pk)
-        comments = Comment.objects.filter(ad=x).order_by('-updated_at')
-        comment_form = CommentForm()
-        context = { 'ad' : x, 'comments': comments, 'comment_form': comment_form }
+        context = { 'ad' : x}
         return render(request, self.template_name, context)
 
 class AdCreateView(LoginRequiredMixin, View):
@@ -106,7 +103,7 @@ class AdUpdateView(LoginRequiredMixin, View):
 
 class AdDeleteView(OwnerDeleteView):
     model = Ad
-    fields = ['title', 'specie','text', 'owner','created_at','updated_at', 'comments']
+    fields = ['title', 'specie','text', 'owner','created_at','updated_at']
     success_url = reverse_lazy('adpet:all')
     template_name = "adpet/ad_confirm_delete.html"
 
@@ -117,19 +114,4 @@ def stream_file(request, pk) :
     response['Content-Length'] = len(pic.picture)
     response.write(pic.picture)
     return response
-
-class CommentCreateView(LoginRequiredMixin, View):
-    def post(self, request, pk) :
-        a = get_object_or_404(Ad, id=pk)
-        comment = Comment(text=request.POST['comment'], owner=request.user, ad=a)
-        comment.save()
-        return redirect(reverse('adpet:ad_detail', args=[pk]))
-
-class CommentDeleteView(OwnerDeleteView):
-    model = Comment
-    template_name = "adpet/comment_delete.html"
-
-    def get_success_url(self):
-        ad = self.object.ad
-        return reverse("adpet:ad_detail", args=[ad.id])
 

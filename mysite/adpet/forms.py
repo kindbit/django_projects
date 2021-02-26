@@ -1,5 +1,5 @@
 from django import forms
-from adpet.models import Ad, Comment
+from adpet.models import Ad
 from django.core.files.uploadedfile import InMemoryUploadedFile
 from adpet.humanize import naturalsize
 from django.core.exceptions import ValidationError

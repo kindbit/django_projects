@@ -58,19 +58,13 @@ class Sterilized(models.Model):
     sterilized = models.CharField(max_length=50, choices=yes_no_choices, null=True)
 
     def __str__(self):
-        return self.vaccinated
+        return self.sterilized
 
 class Ad(models.Model) :
     title = models.CharField(
             max_length=200,
             validators=[MinLengthValidator(2, "Title must be greater than 2 characters")]
     )
-
-    specie = models.ForeignKey(Specie, blank=True, null=True, on_delete=models.SET_NULL)
-    gender = models.ForeignKey(Gender, blank=True, null=True, on_delete=models.SET_NULL)
-    size = models.ForeignKey(Size, blank=True, null=True, on_delete=models.SET_NULL)
-    vaccinated = models.ForeignKey(Vaccinated, blank=True, null=True, on_delete=models.SET_NULL)
-    sterilized = models.ForeignKey(Sterilized, blank=True, null=True, on_delete=models.SET_NULL)
 
     breed = models.CharField(max_length=30, null=True)
     weight = models.DecimalField(max_digits=4,decimal_places=2, null=True)
@@ -91,40 +85,13 @@ class Ad(models.Model) :
 
     #Comment
     owner = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='ad_petowned')
-    comments = models.ManyToManyField(settings.AUTH_USER_MODEL,
-        through='Comment', related_name='adpet_commented')
 
-    # Favorites
-    #favorites = models.ManyToManyField(settings.AUTH_USER_MODEL,
-    #    through='Fav', related_name='favorite_adpet')
+    #Foreign keys
+    specie     = models.ForeignKey(Specie, null=True, on_delete=models.SET_NULL)
+    gender     = models.ForeignKey(Gender, null=True, on_delete=models.SET_NULL)
+    size       = models.ForeignKey(Size, null=True, on_delete=models.SET_NULL)
+    vaccinated = models.ForeignKey(Vaccinated, null=True, on_delete=models.SET_NULL)
+    sterilized = models.ForeignKey(Sterilized, null=True, on_delete=models.SET_NULL)
 
-    # Shows up in the admin list
     def __str__(self):
         return self.title
-
-class Comment(models.Model) :
-    text = models.TextField(
-        validators=[MinLengthValidator(3, "Comment must be greater than 3 characters")]
-    )
-
-    ad = models.ForeignKey(Ad, on_delete=models.CASCADE)
-    owner = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='comments_petowned')
-
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
-
-    # Shows up in the admin list
-    def __str__(self):
-        if len(self.text) < 15 : return self.text
-        return self.text[:11] + ' ...'
-
-class Fav(models.Model) :
-    ad = models.ForeignKey(Ad, on_delete=models.CASCADE)
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='fav_user')
-
-    # https://docs.djangoproject.com/en/3.0/ref/models/options/#unique-together
-    class Meta:
-        unique_together = ('ad', 'user')
-
-    def __str__(self) :
-        return '%s likes %s'%(self.user.username, self.ad.title[:10])
