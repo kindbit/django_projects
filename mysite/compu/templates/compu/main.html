@@ -55,7 +55,7 @@
 <main class="container">
   <div class="bg-light p-5 rounded">
       <h1>{{title}}</h1>
-    <p class="lead">The Computer Inventory Management System is used to store details of all computer you have in your organisation. The database used is a MySQL database with SQL workbench as the database management system. It has a simple user interface for an easy good user experience.</p>
+    <p class="lead">The Computer Inventory Management System is used to store details of all computer you have in your organisation. The database used is a MySQL database. It has a simple user interface for an easy good user experience. Please login for being able to add a pc.</p>
     {% if user.is_authenticated %}
     <a class="btn btn-lg btn-primary" href="{% url 'logout' %}?next={% url 'compu:main' %} " role="button">Logout</a>
     {% else %}

@@ -1,4 +1,5 @@
 {%load static%}
+{% include 'compu/navbar.html' %}
 {% load crispy_forms_tags %}
 
 <!doctype html>
@@ -48,49 +49,13 @@
     <!-- Custom styles for this template -->
     <link href="{% static 'css/stylesheet.css' %}" rel="stylesheet">
     <link href="{% static 'css/navbar-top-fixed.css' %}" rel="stylesheet">
-
-    <link href="{% static 'js/jquery-ui-1.12.1/jquery-ui.min.css' %}" rel="stylesheet">
-    <link href="{% static 'js/jquery-ui-1.12.1/jquery-ui.structure.min.css' %}" rel="stylesheet">
-    <link href="{% static 'js/jquery-ui-1.12.1/jquery-ui.theme.min.css' %}" rel="stylesheet">
-
   </head>
   <body>
 
-{% include 'compu/navbar.html' %}
-
-{% if request.user.is_authenticated %}
-    <main class="container">
-      <div class="bg-light p-5 rounded">
-            <div class="row">
-                <div class="col-sm-4"> <!--- this is the half of the page--->
-                    <h1 class="title">{{title}}</h1>
-                    <form method="post" action="">
-                        {% csrf_token %}
-                        {{form|crispy}}
-                        <p> </p>
-                        <input class="btn btn-primary" type="submit" value="Save" />
-                    </form>
-                </div> <!--- first col-sm-6 --->
-                <div class="col-sm-8 aligncenter">
-                    <img style="width: 100%" src="/static/img/pc.jpg">
-                </div>
-            </div> <!--- first row --->
-      </div>
-    </main>
-{% else %}
-    <main class="container">
-        <div class="bg-light p-5 rounded">
-            <h1>Please contact your admin or login if you want to add an equipment</h1>
-        </div>
-    </main>
-{% endif %}
-
-    <script src="{% static 'js/bootstrap.bundle.min.js' %}" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
-
-    <script src="{% static 'js/jquery-3.5.1.min.js' %}"></script>
-    <script src="{% static 'js/jquery-ui-1.12.1/jquery-ui.js' %}"></script>
-    <script src="{% static 'js/custom.js' %}"></script>
-
-  </body>
-</html>
-
+<main class="container">
+    <div class="bg-light p-5 rounded">
+        <h1>Computer Inventory Management System</h1>
+        <p>This inventory system was possible thru this tutorial: <a href="http://arbcoms.com/computer-inventory-management-system/">ARBCOMS</a></p>
+        <p>Videos in youtube: <a href="https://www.youtube.com/watch?v=QqZQeQ981_M&list=PL6RgKo1nB4TnML7zlusWROAPbA8AM14hN"><img src="{% static 'img/you.png' %}"></a></p>
+    </div>
+</main>

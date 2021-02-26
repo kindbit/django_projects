@@ -1,4 +1,5 @@
 from django.urls import path, reverse_lazy
+from django.contrib import admin
 from django.views.generic import TemplateView
 from . import views
 

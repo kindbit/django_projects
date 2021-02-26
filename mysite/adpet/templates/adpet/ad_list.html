@@ -50,9 +50,9 @@ h2 {text-align:center}
   <h2> CATS </h2>
     <ul class = "grid-list">
       {% for ad in ad_list %}
-        {% if ad.specie == 'Cat'  %}
+          {% ifequal ad.specie|stringformat:"s" 'Cat'%}
             <li>
-                <a href="{% url 'adpet:ad_detail' ad.id %}"> {{ad.gender }} {{ ad.breed }} {{ad.specie}} {{ad.contact}} </a>
+                <a href="{% url 'adpet:ad_detail' ad.id %}"> {{ad.gender }} {{ ad.breed }} {{ad.specie}} </a>
                 <p>Approximate size: {{ad.size}}</p>
 
                 {% if ad.content_type %}
@@ -67,18 +67,18 @@ h2 {text-align:center}
                 (<a href="{% url 'adpet:ad_update' ad.id %}">Edit</a> |
                 <a href="{% url 'adpet:ad_delete' ad.id %}">Delete</a>)
                 {% endif %}
-
             </li>
-        {% endif %}
+          {% endifequal%}
       {% endfor %}
+
     </ul>
 
 </div>
  <div class="column" style="background-color:#bbb;">
- <h2> DOG </h2>
+ <h2> DOGS </h2>
     <ul class = "grid-list">
       {% for ad in ad_list %}
-        {% if ad.specie == 'Dog'  %}
+          {% ifequal ad.specie|stringformat:"s" 'Dog'%}
             <li>
                 <a href="{% url 'adpet:ad_detail' ad.id %}"> {{ad.gender }} {{ ad.breed }} {{ad.specie}} </a>
                 <p>Approximate size: {{ad.size}}</p>
@@ -91,12 +91,12 @@ h2 {text-align:center}
 
                 <p>posted by {{ad.owner}} {{ad.created_at}}</p>
                 {% if ad.owner == user %}
-                (<a href="{% url 'adpet:ad_update' ad.id %}">Edit</a> |
-                <a href="{% url 'adpet:ad_delete' ad.id %}">Delete</a>)
+                    (<a href="{% url 'adpet:ad_update' ad.id %}">Edit</a> |
+                    <a href="{% url 'adpet:ad_delete' ad.id %}">Delete</a>)
                 {% endif %}
 
             </li>
-        {% endif %}
+          {% endifequal %}
       {% endfor %}
     </ul>
 

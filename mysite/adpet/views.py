@@ -16,7 +16,7 @@ from django.db.models import Q
 
 class AdListView(OwnerListView):
     model = Ad
-    fields = ['contact','title','text','specie','owner','created_at','updated_at']
+    fields = ['name','phone','title','text','specie','owner','created_at','updated_at']
     success_url = reverse_lazy('adpet:all')
     template_name = "adpet/ad_list.html"
     def get(self, request) :
@@ -59,7 +59,7 @@ class AdDetailView(OwnerDetailView):
 
 class AdCreateView(LoginRequiredMixin, View):
     model = Ad
-    fields = ['title','text', 'specie', 'breed', 'picture']
+    fields = ['title','text', 'specie', 'breed', 'picture','name','phone']
     template_name = 'adpet/ad_form.html'
     success_url = reverse_lazy('adpet:main')
     def get(self, request, pk=None) :

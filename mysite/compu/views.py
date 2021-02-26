@@ -12,6 +12,9 @@ def main(request):
     }
     return render(request, "compu/main.html",context)
 
+def cims(request):
+    return render(request, "compu/cims.html")
+
 def computer_entry(request):
     title = 'Add Computer'
     form = ComputerForm(request.POST or None)
