@@ -11,6 +11,7 @@ urlpatterns = [
     path('contact_us', TemplateView.as_view(template_name='adpet/contact_us.html'), name='contact_us'),
     path('all_dogs', views.AdListViewDogs.as_view(), name='all_dogs'),
     path('all_cats', views.AdListViewCats.as_view(), name='all_cats'),
+    path('table', views.AdListViewTable.as_view(), name='table'),
     path('',                   views.AdListView.as_view(),   name = 'main'),
     path('adpet',                views.AdListView.as_view(), name = 'all'),
     path('ad/<int:pk>',        views.AdDetailView.as_view(), name = 'ad_detail'),

@@ -13,6 +13,38 @@ from django.contrib.humanize.templatetags.humanize import naturaltime
 from well.utils import dump_queries
 from django.db.models import Q
 
+class AdListViewTable(OwnerListView):
+    model = Ad
+    fields = ['title', 'specie', 'text','owner','created_at','updated_at', 'name','phone' ]
+    success_url = reverse_lazy('adpet:table')
+    template_name = "adpet/ad_table.html"
+    def get(self, request) :
+        ad_list = Ad.objects.all()
+        strval =  request.GET.get("search", False)
+
+        if strval :
+            # Simple title-only search
+            # objects = Post.objects.filter(title__contains=strval).select_related().order_by('-updated_at')[:10]
+
+            # Multi-field search
+            query = Q(title__contains=strval)
+            query.add(Q(text__contains=strval), Q.OR)
+            objects = Ad.objects.filter(query).select_related().order_by('-updated_at')[:10]
+        else :
+            # try both versions with > 4 posts and watch the queries that happen
+            objects = Ad.objects.all().order_by('-updated_at')[:10]
+            # objects = Post.objects.select_related().all().order_by('-updated_at')[:10]
+
+        # Augment the post_list
+        for obj in objects:
+            obj.natural_updated = naturaltime(obj.updated_at)
+
+        ctx = {'ad_list' : ad_list,  'ad_list' : objects, 'search': strval}
+        retval = render(request, self.template_name, ctx)
+
+        dump_queries()
+        return retval;
+
 class AdListViewDogs(OwnerListView):
     model = Ad
     fields = ['title', 'specie', 'text','owner','created_at','updated_at', 'name','phone' ]

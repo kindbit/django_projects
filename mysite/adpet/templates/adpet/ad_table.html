@@ -1,0 +1,122 @@
+{% extends "adpet/base_menu.html" %}
+
+p {
+  margin: 35px;
+}
+
+{% block content %}
+<style>
+h1 {text-align:center}
+h2 {text-align:center}
+
+{
+  box-sizing: border-box;
+}
+
+/* Create two equal columns that floats next to each other */
+.column {
+  float: left;
+  width: 50%;
+  padding: 10px;
+  height: 750px;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+table{
+    width: 95%;
+    margin: auto;
+    text-align: center;
+    box-shadow: 12px 12px 20px 6px #2e6da4;
+    font-size: 15px;
+    vertical-align: middle;
+}
+
+/*Make alternating colors for the table rows*/
+table tr:nth-child(odd){
+    background: #B8CAE4
+}
+
+table tr:nth-child(even){
+    background: #dae5f4
+}
+
+table th {
+    text-align: center;
+    vertical-align: middle;
+}
+
+</style>
+
+<h1>LIST OF ALL PETS IN ADOPTION</h1>
+
+<div style="float:center">
+<form>
+  <input type="text" placeholder="Search.." name="search"
+  {% if search %} value="{{ search }}" {% endif %}
+  >
+  <button type="submit"><i class="fa fa-search"></i></button>
+<a href="{% url 'adpet:all' %}"><i class="fa fa-undo"></i></a>
+</form>
+</div>
+
+<p> <br></br></p>
+
+<p>
+{% if ad_list %}
+  <div>
+    <ul class = "grid-list">
+        <table>
+            <tr>
+                <th>#</th>
+                <th>SPECIE</th>
+                <th>BREED</th>
+                <th>GENDER SYSTEM</th>
+                <th>SIZE</th>
+                <th>VACCINATED</th>
+                <th>SPAYED/NEUTERED</th>
+                <th>WEIGHT</th>
+                <th>AGE</th>
+                <th>NAME</th>
+                <th>PHONE</th>
+            </tr>
+          {% for ad in ad_list %}
+            <tr>
+                <td>{{forloop.counter}}</td>
+                <td><a href="{%url 'adpet:ad_detail' ad.id%}">{{ad.specie}}</a></td>
+                <td>{{ad.breed}} </td>
+                <td>{{ad.gender}} </td>
+                <td>{{ad.size}} </td>
+                <td>{{ad.vaccinated}} </td>
+                <td>{{ad.sterilized}} </td>
+                <td>{{ad.weight}} </td>
+                <td>{{ad.age}} </td>
+                <td>{{ad.name}} </td>
+                <td>{{ad.phone}} </td>
+            </tr>
+          {% endfor %}
+        </table>
+    </ul>
+</div>
+
+{% else %}
+  <p>There are no adpet in the database.</p>
+{% endif %}
+</p>
+
+<p> <br></br></p>
+
+<p>
+<a href="{% url 'adpet:ad_create' %}">Add an ad</a> |
+{% if user.is_authenticated %}
+<a href="{% url 'logout' %}?next={% url 'adpet:all' %}">Logout</a>
+{% else %}
+<a href="{% url 'login' %}?next={% url 'adpet:all' %}">Login</a>
+{% endif %}
+</p>
+{% endblock %}
